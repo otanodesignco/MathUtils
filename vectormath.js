@@ -98,24 +98,53 @@ export default class MathUtils
 
     normalize( v , l )
     {
+       let rtnVec = {}
+
         let len = 0
+        let rtnLen = 0
 
         if( l === 2 )
         {
-            len = this.length( v, 2 )
+            len = ( v1[0] ** 2 ) + ( v1[1] ** 2 )
+
+            rtnVec = 
+            {
+                x: v[0],
+                y: v[1],
+            }
         }
 
         if( l === 3 )
         {
-            len = this.length( v, 3 )
+            len = ( v1[0] ** 2 ) + ( v1[1] ** 2 ) + ( v1[2] ** 2 )
+
+            rtnVec = 
+            {
+                x: v[0],
+                y: v[1],
+                z: v[2],
+            }
         }
 
-        if( len > 0 ) len = 1 / Math.sqrt( len )
+        if( len > 0 ) 
+        {
+            rtnLen = Math.sqrt( len )
 
-        v[0] *= len
-        v[1] *= len
+            if( l === 2)
+            {
+                rtnVec.x = rtnVec.x / rtnLen
+                rtnVec.y = rtnVec.y / rtnLen
+            }
 
-        return v
+            if( l === 3 )
+            {
+                rtnVec.x = rtnVec.x / rtnLen
+                rtnVec.y= rtnVec.y / rtnLen
+                rtnVec.z = rtnVec.z / rtnLen
+            }
+        }
+
+        return rtnVec
     }
 
     // dot product of a vector object for 2 and 3 length vectors
