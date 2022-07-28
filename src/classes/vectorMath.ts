@@ -99,4 +99,35 @@ export class VectorMath
         
     }
 
+    distance( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4 ): number
+    {
+        let subVec: Vector2 | Vector3 | Vector4
+        let rtnVal: number = 0
+
+        if( vector1 instanceof Vector2 && vector2 instanceof Vector2 )
+        {
+            subVec = new Vector2( vector1.getX() - vector2.getX(), vector1.getY() - vector2.getY() )
+
+            rtnVal = this.length( subVec )
+        }
+
+        if( vector1 instanceof Vector3 && vector2 instanceof Vector3 )
+        {
+            subVec = new Vector3( vector1.getX() - vector2.getX(), vector1.getY() - vector2.getY(), vector1.getZ() - vector2.getZ() )
+
+            rtnVal = this.length( subVec )
+        }
+
+        if( vector1 instanceof Vector4 && vector2 instanceof Vector4 )
+        {
+            subVec = new Vector3( vector1.getX() - vector2.getX(), vector1.getY() - vector2.getY(), vector1.getZ() - vector2.getZ() )
+
+            rtnVal = this.length( subVec )
+        }
+
+
+        return rtnVal
+
+    }
+
 }
