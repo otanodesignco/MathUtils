@@ -62,7 +62,7 @@ export class VectorMath
     {
 
         return value - Math.floor( value )
-        
+
     }
 
     length( vector: Vector2 | Vector3 | Vector4 ): number
@@ -74,6 +74,29 @@ export class VectorMath
         if( vector instanceof Vector3 || vector instanceof Vector4 ) rtnValue = ( vector.getX() ** 2 ) + ( vector.getY() ** 2 ) + ( vector.getZ() ** 2 )
 
         return Math.sqrt( rtnValue )
+    }
+
+    dot( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4 ): number
+    {
+        let rtnVal: number = 0
+
+        if( vector1 instanceof Vector2 )
+        {
+            rtnVal = ( ( vector1.getX() * vector2.getX() ) + ( vector1.getY() * vector2.getY() ) )
+        }
+
+        if( vector1 instanceof Vector3 && vector2 instanceof Vector3 )
+        {
+            rtnVal = ( ( vector1.getX() * vector2.getX() ) + ( vector1.getY() * vector2.getY() ) + ( vector1.getZ() * vector2.getZ() ) )
+        }
+
+        if( vector1 instanceof Vector4 && vector2 instanceof Vector4 )
+        {
+            rtnVal = ( ( vector1.getX() * vector2.getX() ) + ( vector1.getY() * vector2.getY() ) + ( vector1.getZ() * vector2.getZ() ) )
+        }
+
+        return rtnVal
+        
     }
 
 }
