@@ -202,7 +202,22 @@ export default class MathUtils
         }
         
         let t = this.clamp( ( x - e1) / ( e2 - e1 ), 0.0, 1.0 )
+
         return t * t * ( 3.0 - 2.0 * t )
+    }
+
+    smootherstep( e1, e2, x )
+    {
+
+        if( e1 >= e2 )
+        {
+            return 0
+        }
+        
+        let t = this.clamp( ( x - e1) / ( e2 - e1 ), 0.0, 1.0 )
+
+        return t * t * t * ( t * ( 6.0 * t - 15.0 ) + 10.0 )
+
     }
     
     reflect( i, n , l )
