@@ -111,8 +111,8 @@ export class Vector2 implements Vec2
     {
 
 
-        this.x /= vector.getX()
-        this.y /= vector.getY()
+        this.x -= vector.getX()
+        this.y -= vector.getY()
         return this
 
     }

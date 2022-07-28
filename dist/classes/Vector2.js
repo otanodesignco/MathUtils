@@ -58,8 +58,8 @@ class Vector2 {
         return this;
     }
     subVector(vector) {
-        this.x /= vector.getX();
-        this.y /= vector.getY();
+        this.x -= vector.getX();
+        this.y -= vector.getY();
         return this;
     }
     divideVector(vector) {
