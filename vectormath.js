@@ -39,6 +39,7 @@ export default class MathUtils
     {
         return ( v - a ) / ( b - a )
     }
+    
     remap( lmin, lmax, omin, omax, v )
     {
         let t = this.lerpInverse( lmin, lmax, v )
