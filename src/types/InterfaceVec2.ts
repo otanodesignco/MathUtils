@@ -9,6 +9,7 @@ export interface Vec2
     get(): object
     getX(): number
     getY(): number
+    copy( vector: Vec2 ): void
     add( scalar: number ): this
     addScalar( scalar: number): this
     subScalar( scalar: number): this

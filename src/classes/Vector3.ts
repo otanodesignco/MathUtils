@@ -61,6 +61,13 @@ export class Vector3 implements Vec3
         return this.z
     }
 
+    copy( vector: Vec3 ): void
+    {
+        this.x = vector.getX()
+        this.y = vector.getY()
+        this.z = vector.getZ()
+    }
+
     add( scalar: number ): this
     {
 

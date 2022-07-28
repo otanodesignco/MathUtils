@@ -33,6 +33,11 @@ class Vector3 {
     getZ() {
         return this.z;
     }
+    copy(vector) {
+        this.x = vector.getX();
+        this.y = vector.getY();
+        this.z = vector.getZ();
+    }
     add(scalar) {
         this.x += scalar;
         this.y += scalar;

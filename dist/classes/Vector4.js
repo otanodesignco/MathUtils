@@ -41,11 +41,20 @@ class Vector4 {
     getZ() {
         return this.z;
     }
+    getW() {
+        return this.w;
+    }
     isPosition() {
         return ((this.w === 1) ? true : false);
     }
     isPoint() {
         return ((this.w === 0) ? true : false);
+    }
+    copy(vector) {
+        this.x = vector.getX();
+        this.y = vector.getY();
+        this.z = vector.getZ();
+        this.w = vector.getW();
     }
     add(scalar) {
         this.x += scalar;

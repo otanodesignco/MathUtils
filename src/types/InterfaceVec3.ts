@@ -12,6 +12,7 @@ export interface Vec3
     getX(): number
     getY(): number
     getZ(): number
+    copy( vector: Vec3 ): void
     add( scalar: number ): this
     addScalar( scalar: number): this
     subScalar( scalar: number): this

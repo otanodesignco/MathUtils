@@ -6,6 +6,10 @@ class Vector2 {
         this.x = x;
         this.y = y;
     }
+    copy(vector) {
+        this.x = vector.getX();
+        this.y = vector.getY();
+    }
     set(x, y) {
         this.x = x;
         this.y = y;

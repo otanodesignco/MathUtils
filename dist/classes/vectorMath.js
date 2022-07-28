@@ -54,5 +54,57 @@ class VectorMath {
         }
         return rtnVal;
     }
+    distance(vector1, vector2) {
+        let subVec;
+        let rtnVal = 0;
+        if (vector1 instanceof Vector2_1.Vector2 && vector2 instanceof Vector2_1.Vector2) {
+            subVec = new Vector2_1.Vector2(vector1.getX() - vector2.getX(), vector1.getY() - vector2.getY());
+            rtnVal = this.length(subVec);
+        }
+        if (vector1 instanceof Vector3_1.Vector3 && vector2 instanceof Vector3_1.Vector3) {
+            subVec = new Vector3_1.Vector3(vector1.getX() - vector2.getX(), vector1.getY() - vector2.getY(), vector1.getZ() - vector2.getZ());
+            rtnVal = this.length(subVec);
+        }
+        if (vector1 instanceof Vector4_1.Vector4 && vector2 instanceof Vector4_1.Vector4) {
+            subVec = new Vector3_1.Vector3(vector1.getX() - vector2.getX(), vector1.getY() - vector2.getY(), vector1.getZ() - vector2.getZ());
+            rtnVal = this.length(subVec);
+        }
+        return rtnVal;
+    }
+    normalize(vector) {
+        let rtnVec = new Vector2_1.Vector2(0, 0);
+        let len = 0;
+        let rtnLen = 0;
+        if (vector instanceof Vector2_1.Vector2) {
+            len = (vector.getX() ** 2) + (vector.getY() ** 2);
+            rtnVec.copy(vector);
+            if (len > 0) {
+                rtnLen = Math.sqrt(len);
+                rtnVec.setX(rtnVec.getX() / rtnLen);
+                rtnVec.setY(rtnVec.getY() / rtnLen);
+            }
+        }
+        if (vector instanceof Vector3_1.Vector3) {
+            len = (vector.getX() ** 2) + (vector.getY() ** 2) + (vector.getZ());
+            rtnVec = new Vector3_1.Vector3(vector.getX(), vector.getY(), vector.getZ());
+            if (len > 0) {
+                rtnLen = Math.sqrt(len);
+                rtnVec.setX(rtnVec.getX() / rtnLen);
+                rtnVec.setY(rtnVec.getY() / rtnLen);
+                rtnVec.setZ(rtnVec.getZ() / rtnLen);
+            }
+        }
+        if (vector instanceof Vector4_1.Vector4) {
+            len = (vector.getX() ** 2) + (vector.getY() ** 2) + (vector.getZ());
+            rtnVec = new Vector4_1.Vector4(vector.getX(), vector.getY(), vector.getZ(), vector.getW());
+            if (len > 0) {
+                rtnLen = Math.sqrt(len);
+                rtnVec.setX(rtnVec.getX() / rtnLen);
+                rtnVec.setY(rtnVec.getY() / rtnLen);
+                rtnVec.setZ(rtnVec.getZ() / rtnLen);
+            }
+        }
+        return rtnVec;
+    }
 }
 exports.VectorMath = VectorMath;

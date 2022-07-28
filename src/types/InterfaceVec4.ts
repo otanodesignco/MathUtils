@@ -13,10 +13,12 @@ export interface Vec4
     setZ( z: number ): void
     toPoint(): void
     toPosition(): void
+    copy( vector: Vec4 ): void
     get(): object
     getX(): number
     getY(): number
     getZ(): number
+    getW(): number
     isPosition(): boolean
     isPoint(): boolean
     add( scalar: number ): this

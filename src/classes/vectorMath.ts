@@ -130,4 +130,74 @@ export class VectorMath
 
     }
 
+    normalize( vector: Vector2 | Vector3 | Vector4 ): Vector2 | Vector3 | Vector4
+    {
+       let rtnVec: Vector2 | Vector3 | Vector4 = new Vector2( 0, 0 )
+
+        let len: number = 0
+        let rtnLen: number = 0
+
+        if( vector instanceof Vector2 )
+        {
+            len = ( vector.getX() ** 2 ) + ( vector.getY() ** 2 )
+
+            rtnVec.copy( vector )
+
+            if( len > 0 )
+            {
+                
+                rtnLen = Math.sqrt( len )
+
+                rtnVec.setX( rtnVec.getX() / rtnLen )
+                rtnVec.setY( rtnVec.getY() / rtnLen )
+
+            }
+
+
+        }
+
+        if( vector instanceof Vector3  )
+        {
+            len = ( vector.getX() ** 2 ) + ( vector.getY() ** 2 ) + ( vector.getZ() )
+
+            rtnVec = new Vector3( vector.getX(), vector.getY(), vector.getZ() )
+
+            if( len > 0 )
+            {
+
+                rtnLen = Math.sqrt( len )
+
+                rtnVec.setX( rtnVec.getX() / rtnLen )
+                rtnVec.setY( rtnVec.getY() / rtnLen )
+                rtnVec.setZ( rtnVec.getZ() / rtnLen )
+
+            }
+
+
+        }
+
+        if( vector instanceof Vector4  )
+        {
+            len = ( vector.getX() ** 2 ) + ( vector.getY() ** 2 ) + ( vector.getZ() )
+
+            rtnVec = new Vector4( vector.getX(), vector.getY(), vector.getZ(), vector.getW() )
+
+            if( len > 0 )
+            {
+
+                rtnLen = Math.sqrt( len )
+
+                rtnVec.setX( rtnVec.getX() / rtnLen )
+                rtnVec.setY( rtnVec.getY() / rtnLen )
+                rtnVec.setZ( rtnVec.getZ() / rtnLen )
+
+            }
+
+
+        }
+
+        return rtnVec
+
+    }
+
 }

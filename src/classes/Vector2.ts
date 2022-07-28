@@ -11,6 +11,12 @@ export class Vector2 implements Vec2
         this.y = y
     }
 
+    copy( vector: Vec2 ): void
+    {
+        this.x = vector.getX()
+        this.y = vector.getY()
+    }
+
     set(x: number, y: number): void 
     {
         this.x = x

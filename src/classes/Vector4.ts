@@ -79,6 +79,11 @@ export class Vector4 implements Vec4
         return this.z
     }
 
+    getW(): number
+    {
+        return this.w
+    }
+
     isPosition(): boolean
     {
 
@@ -91,6 +96,14 @@ export class Vector4 implements Vec4
 
         return ( ( this.w === 0 ) ? true : false )
 
+    }
+
+    copy( vector: Vec4 ): void
+    {
+        this.x = vector.getX()
+        this.y = vector.getY()
+        this.z = vector.getZ()
+        this.w = vector.getW()
     }
 
     add( scalar: number ): this
