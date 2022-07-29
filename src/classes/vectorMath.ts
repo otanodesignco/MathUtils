@@ -14,11 +14,11 @@ export class VectorMath
      * 
      * Lerp
      * 
-     * @param a 
+     * @param a start value
      * 
-     * @param b 
+     * @param b end value
      * 
-     * @param t 
+     * @param t step factor
      * 
      * @returns Linear interpolation from a -> b using t as the step
      */
@@ -34,11 +34,11 @@ export class VectorMath
      * 
      * Mix
      * 
-     * @param x 
+     * @param x starting value
      * 
-     * @param y 
+     * @param y ending value
      * 
-     * @param a 
+     * @param a step factor
      * 
      * @returns Interpolation between x -> y using a as the step, used of color gradients
      */
@@ -54,11 +54,11 @@ export class VectorMath
      * 
      * Lerp Inverse
      * 
-     * @param a 
+     * @param a ending number
      * 
-     * @param b 
+     * @param b starting number
      * 
-     * @param v 
+     * @param v inverse factor
      * 
      * @returns Reverse Interpolation of b -> a from v
      */
@@ -74,15 +74,15 @@ export class VectorMath
      * 
      *  Remap
      * 
-     * @param lmin 
+     * @param lmin input min value
      * 
-     * @param lmax 
+     * @param lmax input max value
      * 
-     * @param omin 
+     * @param omin output min value
      * 
-     * @param omax 
+     * @param omax output max value
      * 
-     * @param v 
+     * @param v remap factor
      * 
      * @returns Remaps the input values lmin & lmax with linear interploation of the values using v as the step
      */
@@ -100,9 +100,9 @@ export class VectorMath
      * 
      * Cross
      * 
-     * @param vector1 
+     * @param vector1 first vector
      * 
-     * @param vector2 
+     * @param vector2 second vector
      * 
      * @returns Cross product of vector1 and vector2
      */
@@ -118,6 +118,19 @@ export class VectorMath
         return rtnVector
     }
 
+    /**
+     * 
+     * Clamp
+     * 
+     * @param val value to constrain
+     * 
+     * @param min min value that val can be
+     * 
+     * @param max max value that val can be
+     * 
+     * @returns constrain value between min and max
+     */
+
     clamp( val: number, min: number, max: number): number
     {
 
@@ -125,12 +138,30 @@ export class VectorMath
 
     }
 
+    /**
+     * 
+     * Fract
+     * 
+     * @param value number for fractional product
+     * 
+     * @returns frational product of value
+     */
+
     fract( value: number ): number
     {
 
         return value - Math.floor( value )
 
     }
+
+    /**
+     * 
+     * Length
+     * 
+     * @param vector vector object
+     * 
+     * @returns Length of the vector
+     */
 
     length( vector: Vector2 | Vector3 | Vector4 ): number
     {
@@ -142,6 +173,17 @@ export class VectorMath
 
         return Math.sqrt( rtnValue )
     }
+
+    /**
+     * 
+     * Dot
+     * 
+     * @param vector1  first vector object
+     * 
+     * @param vector2 second vector
+     * 
+     * @returns Dot product of vector1 & vector2
+     */
 
     dot( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4 ): number
     {
@@ -165,6 +207,17 @@ export class VectorMath
         return rtnVal
         
     }
+
+    /**
+     * 
+     * Distance
+     * 
+     * @param vector1 first vector
+     * 
+     * @param vector2 second vector
+     * 
+     * @returns  Distance from vector1 to vector2
+     */
 
     distance( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4 ): number
     {
@@ -196,6 +249,15 @@ export class VectorMath
         return rtnVal
 
     }
+
+    /**
+     * 
+     * Normalize
+     * 
+     * @param vector vector to normalize
+     * 
+     * @returns Normalized unit vector
+     */
 
     normalize( vector: Vector2 | Vector3 | Vector4 ): Vector2 | Vector3 | Vector4
     {
@@ -316,6 +378,58 @@ export class VectorMath
         }
 
         return rtnVec
+
+    }
+
+    /**
+     * 
+     * Smoothstep
+     * 
+     * @param e1  Edge 1
+     * 
+     * @param e2  Edge 2
+     * 
+     * @param x  Interpolation factor
+     * 
+     * @returns smooth interpolation between e1 -> e2
+     */
+
+    smoothstep( e1: number, e2: number, x: number ): number
+    {
+        if( e1 >= e2 )
+        {
+            return 0
+        }
+        
+        let t: number = this.clamp( ( x - e1 ) / ( e2 - e1 ), 0.0, 1.0 )
+
+        return t * t * ( 3.0 - 2.0 * t )
+    }
+
+    /**
+     * 
+     * Smootherstep
+     * 
+     * @param e1  Edge 1
+     * 
+     * @param e2  Edge 2
+     * 
+     * @param x  Interpolation factor
+     * 
+     * @returns Smoother interpolation between e1 -> e2
+     */
+
+    smootherstep( e1: number, e2: number, x: number ): number
+    {
+
+        if( e1 >= e2 )
+        {
+            return 0
+        }
+        
+        let t: number = this.clamp( ( x - e1 ) / ( e2 - e1 ), 0.0, 1.0 )
+
+        return t * t * t * ( t * ( 6.0 * t - 15.0 ) + 10.0 )
 
     }
 
