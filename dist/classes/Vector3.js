@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Vector3 = void 0;
 class Vector3 {
     constructor(x, y, z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.x = x !== null && x !== void 0 ? x : 0;
+        this.y = y !== null && y !== void 0 ? y : 0;
+        this.z = z !== null && z !== void 0 ? z : 0;
     }
     set(x, y, z) {
         this.x = x;

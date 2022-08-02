@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Vector2 = void 0;
 class Vector2 {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        this.x = x !== null && x !== void 0 ? x : 0;
+        this.y = y !== null && y !== void 0 ? y : 0;
     }
     copy(vector) {
         this.x = vector.getX();
