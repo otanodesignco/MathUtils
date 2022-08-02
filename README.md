@@ -12,7 +12,7 @@ simply clone, no npm for the time being, and import the vectorMath.js or any cla
 
 ### Todo List
 
-- [] add vector equialent for certain methods that can operate on them
+- [] add vector equialent for certain methods that can operate on them - eta 8/8/2022
 - [] replace reflect and refract
 - [] method overloading?
 - [] allow vector instaniation with no params
