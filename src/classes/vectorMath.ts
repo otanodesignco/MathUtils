@@ -30,6 +30,19 @@ export class VectorMath
 
     }
 
+    /**
+     * 
+     * LerpVec2
+     * 
+     * @param vector1 start vector
+     * 
+     * @param vector2 end vector
+     * 
+     * @param t step factor
+     * 
+     * @returns Linear interpolation from a -> b using t as the step
+     */
+
     lerpVec2( vector1: Vector2, vector2: Vector2, t: number): Vector2
     {
 
@@ -50,6 +63,19 @@ export class VectorMath
 
 
     }
+
+    /**
+     * 
+     * LerpVec3
+     * 
+     * @param vector1 start vector
+     * 
+     * @param vector2 end vector
+     * 
+     * @param t step factor
+     * 
+     * @returns Linear interpolation from a -> b using t as the step
+     */
 
     lerpVec3( vector1: Vector3, vector2: Vector3, t: number): Vector3
     {
@@ -76,6 +102,19 @@ export class VectorMath
 
     }
 
+    /**
+     * 
+     * LerpVec4
+     * 
+     * @param vector1 start vector
+     * 
+     * @param vector2 end vector
+     * 
+     * @param t step factor
+     * 
+     * @returns Linear interpolation from a -> b using t as the step
+     */
+
     lerpVec4( vector1: Vector4, vector2: Vector4, t: number): Vector4
     {
 
@@ -98,6 +137,68 @@ export class VectorMath
 
         return rtnVec
 
+
+    }
+
+    slurpVec2( vector1: Vector2, vector2: Vector2, t: number ): Vector2
+    {
+
+        const rtnVec = new Vector2( 0, 0 )
+
+        let angle, sinTotal, ratio1, ratio2:number
+
+        angle = Math.acos( Math.min( Math.max( this.dot( vector1, vector2 ), -1 ), 1 ) )
+        sinTotal = Math.sin( angle )
+
+        ratio1 = Math.sin( ( 1 - t ) * angle ) / sinTotal
+        ratio2 = Math.sin( t * angle ) / sinTotal
+
+        rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
+        rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
+
+        return rtnVec
+
+    }
+
+    slurpVec3( vector1: Vector3, vector2: Vector3, t: number ): Vector3
+    {
+
+        const rtnVec = new Vector3( 0, 0, 0 )
+
+        let angle, sinTotal, ratio1, ratio2:number
+
+        angle = Math.acos( Math.min( Math.max( this.dot( vector1, vector2 ), -1 ), 1 ) )
+        sinTotal = Math.sin( angle )
+
+        ratio1 = Math.sin( ( 1 - t ) * angle ) / sinTotal
+        ratio2 = Math.sin( t * angle ) / sinTotal
+
+        rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
+        rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
+        rtnVec.setZ( ratio1 * vector1.getZ() + ratio2 * vector2.getZ() )
+
+        return rtnVec
+
+    }
+
+    slurpVec4( vector1: Vector4, vector2: Vector4, t: number ): Vector4
+    {
+
+        const rtnVec = new Vector4( 0, 0, 0, vector1.getW() )
+
+        let angle, sinTotal, ratio1, ratio2:number
+
+        angle = Math.acos( Math.min( Math.max( this.dot( vector1, vector2 ), -1 ), 1 ) )
+        sinTotal = Math.sin( angle )
+
+        ratio1 = Math.sin( ( 1 - t ) * angle ) / sinTotal
+        ratio2 = Math.sin( t * angle ) / sinTotal
+
+        rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
+        rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
+        rtnVec.setZ( ratio1 * vector1.getZ() + ratio2 * vector2.getZ() )
+
+        return rtnVec
 
     }
 

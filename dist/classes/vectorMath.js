@@ -22,6 +22,18 @@ class VectorMath {
     lerp(a, b, t) {
         return (1.0 - t) * a + b * t;
     }
+    /**
+     *
+     * LerpVec2
+     *
+     * @param vector1 start vector
+     *
+     * @param vector2 end vector
+     *
+     * @param t step factor
+     *
+     * @returns Linear interpolation from a -> b using t as the step
+     */
     lerpVec2(vector1, vector2, t) {
         const rtnVec = new Vector2_1.Vector2(0, 0);
         let x, y, x2, y2;
@@ -33,6 +45,18 @@ class VectorMath {
         rtnVec.setY((1.0 - t) * y + y2 * t);
         return rtnVec;
     }
+    /**
+     *
+     * LerpVec3
+     *
+     * @param vector1 start vector
+     *
+     * @param vector2 end vector
+     *
+     * @param t step factor
+     *
+     * @returns Linear interpolation from a -> b using t as the step
+     */
     lerpVec3(vector1, vector2, t) {
         const rtnVec = new Vector3_1.Vector3(0, 0, 0);
         let x, y, x2, y2, z, z2;
@@ -47,6 +71,18 @@ class VectorMath {
         rtnVec.setZ((1.0 - t) * z + z2 * t);
         return rtnVec;
     }
+    /**
+     *
+     * LerpVec4
+     *
+     * @param vector1 start vector
+     *
+     * @param vector2 end vector
+     *
+     * @param t step factor
+     *
+     * @returns Linear interpolation from a -> b using t as the step
+     */
     lerpVec4(vector1, vector2, t) {
         const rtnVec = new Vector4_1.Vector4(0, 0, 0, vector1.getW());
         let x, y, x2, y2, z, z2;
@@ -59,6 +95,41 @@ class VectorMath {
         rtnVec.setX((1.0 - t) * x + x2 * t);
         rtnVec.setY((1.0 - t) * y + y2 * t);
         rtnVec.setZ((1.0 - t) * z + z2 * t);
+        return rtnVec;
+    }
+    slurpVec2(vector1, vector2, t) {
+        const rtnVec = new Vector2_1.Vector2(0, 0);
+        let angle, sinTotal, ratio1, ratio2;
+        angle = Math.acos(Math.min(Math.max(this.dot(vector1, vector2), -1), 1));
+        sinTotal = Math.sin(angle);
+        ratio1 = Math.sin((1 - t) * angle) / sinTotal;
+        ratio2 = Math.sin(t * angle) / sinTotal;
+        rtnVec.setX(ratio1 * vector1.getX() + ratio2 * vector2.getX());
+        rtnVec.setY(ratio1 * vector1.getY() + ratio2 * vector2.getY());
+        return rtnVec;
+    }
+    slurpVec3(vector1, vector2, t) {
+        const rtnVec = new Vector3_1.Vector3(0, 0, 0);
+        let angle, sinTotal, ratio1, ratio2;
+        angle = Math.acos(Math.min(Math.max(this.dot(vector1, vector2), -1), 1));
+        sinTotal = Math.sin(angle);
+        ratio1 = Math.sin((1 - t) * angle) / sinTotal;
+        ratio2 = Math.sin(t * angle) / sinTotal;
+        rtnVec.setX(ratio1 * vector1.getX() + ratio2 * vector2.getX());
+        rtnVec.setY(ratio1 * vector1.getY() + ratio2 * vector2.getY());
+        rtnVec.setZ(ratio1 * vector1.getZ() + ratio2 * vector2.getZ());
+        return rtnVec;
+    }
+    slurpVec4(vector1, vector2, t) {
+        const rtnVec = new Vector4_1.Vector4(0, 0, 0, vector1.getW());
+        let angle, sinTotal, ratio1, ratio2;
+        angle = Math.acos(Math.min(Math.max(this.dot(vector1, vector2), -1), 1));
+        sinTotal = Math.sin(angle);
+        ratio1 = Math.sin((1 - t) * angle) / sinTotal;
+        ratio2 = Math.sin(t * angle) / sinTotal;
+        rtnVec.setX(ratio1 * vector1.getX() + ratio2 * vector2.getX());
+        rtnVec.setY(ratio1 * vector1.getY() + ratio2 * vector2.getY());
+        rtnVec.setZ(ratio1 * vector1.getZ() + ratio2 * vector2.getZ());
         return rtnVec;
     }
     /**
