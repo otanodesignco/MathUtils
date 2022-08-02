@@ -96,5 +96,17 @@ class Vector3 {
         this.z *= vector.getZ();
         return this;
     }
+    negate() {
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
+        return this;
+    }
+    inverse() {
+        this.x = 1.0 / this.x;
+        this.y = 1.0 / this.y;
+        this.z = 1.0 / this.z;
+        return this;
+    }
 }
 exports.Vector3 = Vector3;

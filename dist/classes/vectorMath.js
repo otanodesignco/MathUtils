@@ -22,6 +22,45 @@ class VectorMath {
     lerp(a, b, t) {
         return (1.0 - t) * a + b * t;
     }
+    lerpVec2(vector1, vector2, t) {
+        const rtnVec = new Vector2_1.Vector2(0, 0);
+        let x, y, x2, y2;
+        x = vector1.getX();
+        x2 = vector2.getX();
+        y = vector1.getY();
+        y2 = vector2.getY();
+        rtnVec.setX((1.0 - t) * x + x2 * t);
+        rtnVec.setY((1.0 - t) * y + y2 * t);
+        return rtnVec;
+    }
+    lerpVec3(vector1, vector2, t) {
+        const rtnVec = new Vector3_1.Vector3(0, 0, 0);
+        let x, y, x2, y2, z, z2;
+        x = vector1.getX();
+        x2 = vector2.getX();
+        y = vector1.getY();
+        y2 = vector2.getY();
+        z = vector1.getZ();
+        z2 = vector2.getZ();
+        rtnVec.setX((1.0 - t) * x + x2 * t);
+        rtnVec.setY((1.0 - t) * y + y2 * t);
+        rtnVec.setZ((1.0 - t) * z + z2 * t);
+        return rtnVec;
+    }
+    lerpVec4(vector1, vector2, t) {
+        const rtnVec = new Vector4_1.Vector4(0, 0, 0, vector1.getW());
+        let x, y, x2, y2, z, z2;
+        x = vector1.getX();
+        x2 = vector2.getX();
+        y = vector1.getY();
+        y2 = vector2.getY();
+        z = vector1.getZ();
+        z2 = vector2.getZ();
+        rtnVec.setX((1.0 - t) * x + x2 * t);
+        rtnVec.setY((1.0 - t) * y + y2 * t);
+        rtnVec.setZ((1.0 - t) * z + z2 * t);
+        return rtnVec;
+    }
     /**
      *
      * Mix

@@ -30,6 +30,77 @@ export class VectorMath
 
     }
 
+    lerpVec2( vector1: Vector2, vector2: Vector2, t: number): Vector2
+    {
+
+        const rtnVec = new Vector2( 0, 0 )
+
+        let x,y,x2,y2: number
+
+        x = vector1.getX()
+        x2 = vector2.getX()
+
+        y = vector1.getY()
+        y2 = vector2.getY()
+
+        rtnVec.setX( ( 1.0 - t) * x + x2 * t )
+        rtnVec.setY( ( 1.0 - t) * y + y2 * t )
+
+        return rtnVec
+
+
+    }
+
+    lerpVec3( vector1: Vector3, vector2: Vector3, t: number): Vector3
+    {
+
+        const rtnVec = new Vector3( 0, 0, 0 )
+
+        let x,y,x2,y2,z,z2: number
+
+        x = vector1.getX()
+        x2 = vector2.getX()
+
+        y = vector1.getY()
+        y2 = vector2.getY()
+
+        z = vector1.getZ()
+        z2 = vector2.getZ()
+
+        rtnVec.setX( ( 1.0 - t) * x + x2 * t )
+        rtnVec.setY( ( 1.0 - t) * y + y2 * t )
+        rtnVec.setZ( ( 1.0 - t) * z + z2 * t )
+
+        return rtnVec
+
+
+    }
+
+    lerpVec4( vector1: Vector4, vector2: Vector4, t: number): Vector4
+    {
+
+        const rtnVec = new Vector4( 0, 0, 0, vector1.getW() )
+
+        let x,y,x2,y2,z,z2: number
+
+        x = vector1.getX()
+        x2 = vector2.getX()
+
+        y = vector1.getY()
+        y2 = vector2.getY()
+
+        z = vector1.getZ()
+        z2 = vector2.getZ()
+
+        rtnVec.setX( ( 1.0 - t) * x + x2 * t )
+        rtnVec.setY( ( 1.0 - t) * y + y2 * t )
+        rtnVec.setZ( ( 1.0 - t) * z + z2 * t )
+
+        return rtnVec
+
+
+    }
+
     /**
      * 
      * Mix

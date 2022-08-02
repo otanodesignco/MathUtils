@@ -211,4 +211,26 @@ export class Vector4 implements Vec4
         return this
 
     }
+
+    negate(): this
+    {
+
+        this.x = -this.x
+        this.y = -this.y
+        this.z = -this.z
+
+        return this
+
+    }
+
+    inverse(): this
+    {
+
+        this.x = 1.0 / this.x
+        this.y = 1.0 / this.y
+        this.z = 1.0 / this.z
+
+        return this
+
+    }
 }

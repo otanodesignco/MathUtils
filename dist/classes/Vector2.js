@@ -78,5 +78,15 @@ class Vector2 {
         this.y *= vector.getY();
         return this;
     }
+    negate() {
+        this.x = -this.x;
+        this.y = -this.y;
+        return this;
+    }
+    inverse() {
+        this.x = 1.0 / this.x;
+        this.y = 1.0 / this.y;
+        return this;
+    }
 }
 exports.Vector2 = Vector2;

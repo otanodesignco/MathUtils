@@ -19,5 +19,7 @@ export interface Vec2
     subVector( vector: Vec2 ): this
     divideVector( vector: Vec2 ): this
     multiplyVector( vector: Vec2 ): this
+    negate(): this
+    inverse(): this
 
 }

@@ -147,4 +147,24 @@ export class Vector2 implements Vec2
         return this
 
     }
+    
+    negate(): this
+    {
+
+        this.x = -this.x
+        this.y = -this.y
+
+        return this
+
+    }
+
+    inverse(): this
+    {
+
+        this.x = 1.0 / this.x
+        this.y = 1.0 / this.y
+
+        return this
+
+    }
 }

@@ -30,5 +30,7 @@ export interface Vec4
     subVector( vector: Vec3 | Vec4 ): this
     divideVector( vector: Vec3 | Vec4 ): this
     multiplyVector( vector: Vec3 | Vec4 ): this
+    negate(): this
+    inverse(): this
 
 }
