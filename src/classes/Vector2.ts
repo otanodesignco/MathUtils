@@ -5,10 +5,10 @@ export class Vector2 implements Vec2
     x: number
     y: number
 
-    constructor( x: number, y: number )
+    constructor( x?: number, y?: number )
     {
-        this.x = x
-        this.y = y
+        this.x = x ?? 0
+        this.y = y ?? 0
     }
 
     copy( vector: Vec2 ): void
@@ -147,7 +147,7 @@ export class Vector2 implements Vec2
         return this
 
     }
-    
+
     negate(): this
     {
 
