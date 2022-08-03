@@ -24,181 +24,217 @@ export class VectorMath
      */
 
     lerp( a: number, b: number, t: number ): number
+    lerp( a: Vector2, b: Vector2 , t: number ): Vector2
+    lerp( a: Vector3, b: Vector3 , t: number ): Vector3
+    lerp( a: Vector4, b: Vector4 , t: number ): Vector4
+
+    lerp( a: number | Vector2 | Vector3 | Vector4, b: number | Vector2 | Vector3 | Vector4, t: number ): number | Vector2 | Vector3 | Vector4 | undefined
     {
         
-        return ( 1.0 - t ) * a + b * t
+        if( typeof a === 'number' && typeof b === 'number' ) 
+        {
+            return ( 1.0 - t ) * a + b * t
+        }
 
-    }
-
-    /**
-     * 
-     * LerpVec2
-     * 
-     * @param vector1 start vector
-     * 
-     * @param vector2 end vector
-     * 
-     * @param t step factor
-     * 
-     * @returns Linear interpolation from a -> b using t as the step
-     */
-
-    lerpVec2( vector1: Vector2, vector2: Vector2, t: number): Vector2
-    {
-
-        const rtnVec = new Vector2( 0, 0 )
+        if( a instanceof Vector2 && b instanceof Vector2 )
+        {
+            const rtnVec = new Vector2()
 
         let x,y,x2,y2: number
 
-        x = vector1.getX()
-        x2 = vector2.getX()
+            x = a.getX()
+            x2 = b.getX()
 
-        y = vector1.getY()
-        y2 = vector2.getY()
+            y = a.getY()
+            y2 = b.getY()
 
-        rtnVec.setX( ( 1.0 - t) * x + x2 * t )
-        rtnVec.setY( ( 1.0 - t) * y + y2 * t )
+            rtnVec.setX( ( 1.0 - t) * x + x2 * t )
+            rtnVec.setY( ( 1.0 - t) * y + y2 * t )
 
-        return rtnVec
+            return rtnVec
+        }
 
+        if( a instanceof Vector3 && b instanceof Vector3 )
+        {
+            const rtnVec = new Vector3()
+
+            let x,y,x2,y2,z,z2: number
+
+            x = a.getX()
+            x2 = b.getX()
+
+            y = a.getY()
+            y2 = b.getY()
+
+            z = a.getZ()
+            z2 = b.getZ()
+
+            rtnVec.setX( ( 1.0 - t) * x + x2 * t )
+            rtnVec.setY( ( 1.0 - t) * y + y2 * t )
+            rtnVec.setZ( ( 1.0 - t) * z + z2 * t )
+
+            return rtnVec
+        }
+
+        if( a instanceof Vector4 && b instanceof Vector4 )
+        {
+
+            const rtnVec: Vector4 = new Vector4( 0, 0, 0, a.getW() )
+
+            let x,y,x2,y2,z,z2: number
+
+            x = a.getX()
+            x2 = b.getX()
+
+            y = a.getY()
+            y2 = b.getY()
+
+            z = a.getZ()
+            z2 = b.getZ()
+
+            rtnVec.setX( ( 1.0 - t) * x + x2 * t )
+            rtnVec.setY( ( 1.0 - t) * y + y2 * t )
+            rtnVec.setZ( ( 1.0 - t) * z + z2 * t )
+
+            return rtnVec
+
+        }
 
     }
 
     /**
      * 
-     * LerpVec3
+     *  Slurp spherical linear interpolation
      * 
-     * @param vector1 start vector
+     * @param vector1 vec2 - 4 to perform interpolation
      * 
-     * @param vector2 end vector
+     * @param vector2 vec2 - 4 to perform interpolation
      * 
-     * @param t step factor
-     * 
-     * @returns Linear interpolation from a -> b using t as the step
+     * @param t number to interpolate using
      */
+    
+    slurp( vector1: Vector2, vector2: Vector2, t: number ): Vector2
+    slurp( vector1: Vector3, vector2: Vector3, t: number ): Vector3
+    slurp( vector1: Vector4, vector2: Vector4, t: number ): Vector4
 
-    lerpVec3( vector1: Vector3, vector2: Vector3, t: number): Vector3
+    slurp( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4, t: number ): Vector2 | Vector3 | Vector4 | undefined
     {
 
-        const rtnVec = new Vector3( 0, 0, 0 )
+        let angle, sinTotal, ratio1, ratio2: number
 
-        let x,y,x2,y2,z,z2: number
+        angle = Math.acos( Math.min( Math.max( this.dot( vector1, vector2 ), -1 ), 1 ) )
+        sinTotal = Math.sin( angle )
 
-        x = vector1.getX()
-        x2 = vector2.getX()
+        ratio1 = Math.sin( ( 1 - t ) * angle ) / sinTotal
+        ratio2 = Math.sin( t * angle ) / sinTotal
 
-        y = vector1.getY()
-        y2 = vector2.getY()
+        if( vector1 instanceof Vector2 && vector2 instanceof Vector2 )
+        {
 
-        z = vector1.getZ()
-        z2 = vector2.getZ()
+            const rtnVec: Vector2 = new Vector2()
 
-        rtnVec.setX( ( 1.0 - t) * x + x2 * t )
-        rtnVec.setY( ( 1.0 - t) * y + y2 * t )
-        rtnVec.setZ( ( 1.0 - t) * z + z2 * t )
+            rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
+            rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
 
-        return rtnVec
+            return rtnVec
 
+        }
 
+        if( vector1 instanceof Vector3 && vector2 instanceof Vector3 )
+        {
+
+            const rtnVec: Vector3 = new Vector3()
+
+            rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
+            rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
+            rtnVec.setZ( ratio1 * vector1.getZ() + ratio2 * vector2.getZ() )
+
+            return rtnVec
+
+        }
+
+        if( vector1 instanceof Vector4 && vector2 instanceof Vector4 )
+        {
+
+            const rtnVec: Vector4 = new Vector4( 0, 0, 0, vector1.getW() )
+
+            rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
+            rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
+            rtnVec.setZ( ratio1 * vector1.getZ() + ratio2 * vector2.getZ() )
+
+            return rtnVec
+
+        }
+        
     }
 
     /**
      * 
-     * LerpVec4
+     *  Hermite - hermite interpolation with two control points
      * 
-     * @param vector1 start vector
+     * @param vector1 vec2 - vec4 
      * 
-     * @param vector2 end vector
+     * @param vector2 vec2 - vec4
+     * 
+     * @param vector3 vec2 - vec4
+     * 
+     * @param vector4 vec2 - vec4
      * 
      * @param t step factor
-     * 
-     * @returns Linear interpolation from a -> b using t as the step
      */
 
-    lerpVec4( vector1: Vector4, vector2: Vector4, t: number): Vector4
+    hermite( vector1: Vector2, vector2: Vector2, vector3: Vector2, vector4: Vector2, t: number ): Vector2
+    hermite( vector1: Vector3, vector2: Vector3, vector3: Vector3, vector4: Vector3, t: number ): Vector3
+    hermite( vector1: Vector4, vector2: Vector4, vector3: Vector4, vector4: Vector4, t: number ): Vector4
+
+    hermite( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4, vector3: Vector2 | Vector3 | Vector4, vector4: Vector2 | Vector3 | Vector4, t: number ): Vector2 | Vector3 | Vector4 | undefined
     {
 
-        const rtnVec = new Vector4( 0, 0, 0, vector1.getW() )
+        let factorOf2, factor1, factor2, factor3, factor4: number
 
-        let x,y,x2,y2,z,z2: number
+        factorOf2 = t * t
+        factor1 = factorOf2 * (2. * t - 3.) + 1.
+        factor2 = factorOf2 * (t - 2.) + t
+        factor3 = factorOf2 * (t - 1.)
+        factor4 = factorOf2 * (3. - 2. * t)
 
-        x = vector1.getX()
-        x2 = vector2.getX()
+        if( vector1 instanceof Vector2 && vector2 instanceof Vector2 && vector3 instanceof Vector2 && vector4 instanceof Vector2 )
+        {
 
-        y = vector1.getY()
-        y2 = vector2.getY()
+            const rtnVec: Vector2 = new Vector2()
 
-        z = vector1.getZ()
-        z2 = vector2.getZ()
+            rtnVec.setX( vector1.getX() * factor1 + vector2.getX() * factor2 + vector3.getX() * factor3 + vector4.getX() * factor4 )
+            rtnVec.setY( vector1.getY() * factor1 + vector2.getY() * factor2 + vector3.getY() * factor3 + vector4.getY() * factor4 )
 
-        rtnVec.setX( ( 1.0 - t) * x + x2 * t )
-        rtnVec.setY( ( 1.0 - t) * y + y2 * t )
-        rtnVec.setZ( ( 1.0 - t) * z + z2 * t )
+            return rtnVec
 
-        return rtnVec
+        }
 
+        if( vector1 instanceof Vector3 && vector2 instanceof Vector3 && vector3 instanceof Vector3 && vector4 instanceof Vector3 )
+        {
 
-    }
+            const rtnVec: Vector3 = new Vector3()
 
-    slurpVec2( vector1: Vector2, vector2: Vector2, t: number ): Vector2
-    {
+            rtnVec.setX( vector1.getX() * factor1 + vector2.getX() * factor2 + vector3.getX() * factor3 + vector4.getX() * factor4 )
+            rtnVec.setY( vector1.getY() * factor1 + vector2.getY() * factor2 + vector3.getY() * factor3 + vector4.getY() * factor4 )
+            rtnVec.setZ( vector1.getZ() * factor1 + vector2.getZ() * factor2 + vector3.getZ() * factor3 + vector4.getZ() * factor4 )
 
-        const rtnVec = new Vector2( 0, 0 )
+            return rtnVec
 
-        let angle, sinTotal, ratio1, ratio2:number
+        }
 
-        angle = Math.acos( Math.min( Math.max( this.dot( vector1, vector2 ), -1 ), 1 ) )
-        sinTotal = Math.sin( angle )
+        if( vector1 instanceof Vector4 && vector2 instanceof Vector4 && vector3 instanceof Vector4 && vector4 instanceof Vector4 )
+        {
 
-        ratio1 = Math.sin( ( 1 - t ) * angle ) / sinTotal
-        ratio2 = Math.sin( t * angle ) / sinTotal
+            const rtnVec: Vector4 = new Vector4( 0, 0, 0, vector1.getW() )
 
-        rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
-        rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
+            rtnVec.setX( vector1.getX() * factor1 + vector2.getX() * factor2 + vector3.getX() * factor3 + vector4.getX() * factor4 )
+            rtnVec.setY( vector1.getY() * factor1 + vector2.getY() * factor2 + vector3.getY() * factor3 + vector4.getY() * factor4 )
+            rtnVec.setZ( vector1.getZ() * factor1 + vector2.getZ() * factor2 + vector3.getZ() * factor3 + vector4.getZ() * factor4 )
 
-        return rtnVec
+            return rtnVec
 
-    }
-
-    slurpVec3( vector1: Vector3, vector2: Vector3, t: number ): Vector3
-    {
-
-        const rtnVec = new Vector3( 0, 0, 0 )
-
-        let angle, sinTotal, ratio1, ratio2:number
-
-        angle = Math.acos( Math.min( Math.max( this.dot( vector1, vector2 ), -1 ), 1 ) )
-        sinTotal = Math.sin( angle )
-
-        ratio1 = Math.sin( ( 1 - t ) * angle ) / sinTotal
-        ratio2 = Math.sin( t * angle ) / sinTotal
-
-        rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
-        rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
-        rtnVec.setZ( ratio1 * vector1.getZ() + ratio2 * vector2.getZ() )
-
-        return rtnVec
-
-    }
-
-    slurpVec4( vector1: Vector4, vector2: Vector4, t: number ): Vector4
-    {
-
-        const rtnVec = new Vector4( 0, 0, 0, vector1.getW() )
-
-        let angle, sinTotal, ratio1, ratio2:number
-
-        angle = Math.acos( Math.min( Math.max( this.dot( vector1, vector2 ), -1 ), 1 ) )
-        sinTotal = Math.sin( angle )
-
-        ratio1 = Math.sin( ( 1 - t ) * angle ) / sinTotal
-        ratio2 = Math.sin( t * angle ) / sinTotal
-
-        rtnVec.setX( ratio1 * vector1.getX() + ratio2 * vector2.getX() )
-        rtnVec.setY( ratio1 * vector1.getY() + ratio2 * vector2.getY() )
-        rtnVec.setZ( ratio1 * vector1.getZ() + ratio2 * vector2.getZ() )
-
-        return rtnVec
+        }
 
     }
 
