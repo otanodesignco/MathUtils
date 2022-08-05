@@ -12,9 +12,8 @@ simply clone, no npm for the time being, and import the vectorMath.js or any cla
 
 ### Todo List
 
-- [] add vector equialent for certain methods that can operate on them - eta 8/8/2022
-- [] replace reflect and refract
-- [] method overloading?
+- [X] add vector equialent for certain methods that can operate on them
+- [X] method overloading?
 - [x] allow vector instaniation with no params
-- [] add other GLSL functions not featured
+- [X] add other GLSL functions not featured - thanks to [gl_Matrix](https://github.com/toji/gl-matrix/) for slurp and hermite methods, for implementaion 
 - [] turn into a package

@@ -252,9 +252,50 @@ export class VectorMath
      */
 
     mix( x: number, y: number, a: number ): number
+    mix( x: Vector2, y: Vector2, a: number ): Vector2
+    mix( x: Vector3, y: Vector3, a: number ): Vector3
+    mix( x: Vector4, y: Vector4, a: number ): Vector4
+
+    mix( x: number | Vector2 | Vector3 | Vector4, y: number | Vector2 | Vector3 | Vector4, a: number ): number | Vector2 | Vector3 | Vector4
     {
 
-        return x * ( 1.0 - a ) + y -a
+        let rtn: number | Vector2 | Vector3 | Vector4 = 0
+        let r,g,b: number
+
+        if( typeof x === 'number' && typeof y === 'number' )
+        {
+            rtn = x * ( 1.0 - a ) + y - a
+        }
+
+        if( x instanceof Vector2 && y instanceof Vector2 )
+        {
+            r = x.getX() * ( 1.0 - a) + y.getX() - a
+            g = x.getY() * ( 1.0 - a) + y.getY() - a
+
+            rtn = new Vector2( r, g )
+        }
+
+        if( x instanceof Vector3 && y instanceof Vector3 )
+        {
+            r = x.getX() * ( 1.0 - a ) + y.getX() - a
+            g = x.getY() * ( 1.0 - a ) + y.getY() - a
+            b = x.getZ() * ( 1.0 - a ) + y.getZ() - a
+
+            rtn = new Vector3( r, g, b )
+        }
+
+        if( x instanceof Vector4 && y instanceof Vector4 )
+        {
+            r = x.getX() * ( 1.0 - a ) + y.getX() - a
+            g = x.getY() * ( 1.0 - a ) + y.getY() - a
+            b = x.getZ() * ( 1.0 - a ) + y.getZ() - a
+
+            rtn = new Vector4( r, g, b, x.getW() )
+        }
+
+
+
+        return rtn
 
     }
 
@@ -272,9 +313,48 @@ export class VectorMath
      */
 
     lerpInverse( a: number, b: number, v: number ): number
+    lerpInverse( a: Vector2, b: Vector2, v: number ): Vector2
+    lerpInverse( a: Vector3, b: Vector3, v: number ): Vector3
+    lerpInverse( a: Vector4, b: Vector4, v: number ): Vector4
+
+    lerpInverse( a: number | Vector2 | Vector3 | Vector4, b: number | Vector2 | Vector3 | Vector4, v: number ): number | Vector2 | Vector3 | Vector4
     {
 
-        return ( v - a ) / ( b - a )
+        let rtn: number | Vector2 | Vector3 | Vector4 = 0
+        let x,y,z: number
+
+        if( typeof a === 'number' && typeof b === 'number')
+        {
+            rtn = ( v - a ) / ( b - a )
+        }
+
+        if( a instanceof Vector2 && b instanceof Vector2 )
+        {
+            x = ( v - a.getX() ) / ( b.getX() - a.getX() )
+            y = ( v - a.getY() ) / ( b.getY() - a.getY() )
+
+            rtn = new Vector2( x, y )
+        }
+
+        if( a instanceof Vector3 && b instanceof Vector3 )
+        {
+            x = ( v - a.getX() ) / ( b.getX() - a.getX() )
+            y = ( v - a.getY() ) / ( b.getY() - a.getY() )
+            z = ( v - a.getZ() ) / ( b.getZ() - a.getZ() )
+
+            rtn = new Vector3( x, y, z )
+        }
+
+        if( a instanceof Vector4 && b instanceof Vector4 )
+        {
+            x = ( v - a.getX() ) / ( b.getX() - a.getX() )
+            y = ( v - a.getY() ) / ( b.getY() - a.getY() )
+            z = ( v - a.getZ() ) / ( b.getZ() - a.getZ() )
+
+            rtn = new Vector4( x, y, z, a.getW() )
+        }
+
+        return rtn
 
     }
 
@@ -315,7 +395,7 @@ export class VectorMath
      * @returns Cross product of vector1 and vector2
      */
 
-    cross( vector1: Vector3 | Vector4, vector2: Vector3 | Vector4 ): Vector3
+    cross( vector1: Vector3, vector2: Vector3 ): Vector3
     {
         const rtnVector = new Vector3( 0, 0, 0 )
 
@@ -340,9 +420,50 @@ export class VectorMath
      */
 
     clamp( val: number, min: number, max: number): number
+    clamp( val: Vector2, min: number, max: number): Vector2
+    clamp( val: Vector3, min: number, max: number): Vector3
+    clamp( val: Vector4, min: number, max: number): Vector4
+
+    clamp( val: number | Vector2 | Vector3 | Vector4, min: number, max: number): number | Vector2 | Vector3 | Vector4
     {
 
-        return Math.min( Math.max( val, min), max )
+        let rtn: number | Vector2 | Vector3 | Vector4 = 0
+        let x,y,z: number
+
+        if( typeof val == 'number' )
+        {
+            rtn = Math.min( Math.max( val, min), max )
+        }
+        if( val instanceof Vector2 )
+        {
+            
+            x = Math.min( Math.max( val.getX(), min), max ) 
+            y = Math.min( Math.max( val.getY(), min), max ) 
+
+            rtn =  new Vector2( x, y )
+
+        }
+        if( val instanceof Vector3 )
+        {
+        
+            x = Math.min( Math.max( val.getX(), min), max ) 
+            y = Math.min( Math.max( val.getY(), min), max ) 
+            z = Math.min( Math.max( val.getZ(), min), max ) 
+
+            rtn = new Vector3( x, y, z)
+
+        }
+        if( val instanceof Vector4 )
+        {
+            x = Math.min( Math.max( val.getX(), min), max ) 
+            y = Math.min( Math.max( val.getY(), min), max ) 
+            z = Math.min( Math.max( val.getZ(), min), max ) 
+
+            rtn = new Vector4( x, y, z, val.getW() )
+
+        }
+
+        return rtn
 
     }
 
@@ -392,12 +513,13 @@ export class VectorMath
      * 
      * @returns Dot product of vector1 & vector2
      */
-
+    
+   
     dot( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4 ): number
     {
         let rtnVal: number = 0
 
-        if( vector1 instanceof Vector2 )
+        if( vector1 instanceof Vector2 && vector2 instanceof Vector2 )
         {
             rtnVal = ( ( vector1.getX() * vector2.getX() ) + ( vector1.getY() * vector2.getY() ) )
         }
@@ -426,6 +548,10 @@ export class VectorMath
      * 
      * @returns  Distance from vector1 to vector2
      */
+
+     distance( vector1: Vector2, vector2: Vector2 ): number
+     distance( vector1: Vector3, vector2: Vector3 ): number
+     distance( vector1: Vector4, vector2: Vector4 ): number
 
     distance( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4 ): number
     {
@@ -548,44 +674,54 @@ export class VectorMath
      * 
      */
 
-    step( vector1: Vector2 | Vector3 | Vector4, vector2: Vector2 | Vector3 | Vector4 ): Vector2 | Vector3 | Vector4
+    step( vector1: number, vector2: number ): number
+    step( vector1: Vector2, vector2: Vector2 ): Vector2
+    step( vector1: Vector3, vector2: Vector3 ): Vector3
+    step( vector1: Vector4, vector2: Vector4 ): Vector4
+
+    step( vector1: number | Vector2 | Vector3 | Vector4, vector2: number | Vector2 | Vector3 | Vector4 ): number | Vector2 | Vector3 | Vector4
     {
-        let rtnVec: Vector2 | Vector3 | Vector4 = new Vector2( 0, 0 )
+        let rtn: number | Vector2 | Vector3 | Vector4 = 0
+        let x, y, z: number
+
+        if( typeof vector1 === 'number' && typeof vector2 === 'number' )
+        {
+            rtn = ( ( vector2 < vector1 ) ? 0 : 1 )
+        }
 
         if( vector1 instanceof Vector2 && vector2 instanceof Vector2 )
         {
-            let x,y: number
+        
             x = ( ( vector2.getX() < vector1.getX() ) ? 0 : 1 )
             y = ( ( vector2.getY() < vector1.getY() ) ? 0 : 1 )
             
-            rtnVec.set( x, y )
+            rtn = new Vector2( x, y )
+
         }
 
         if( vector1 instanceof Vector3 && vector2 instanceof Vector3 )
         {
-            let x,y,z: number
-            rtnVec = new Vector3( 0, 0, 0 )
-
+            
             x = ( ( vector2.getX() < vector1.getX() ) ? 0 : 1 )
             y = ( ( vector2.getY() < vector1.getY() ) ? 0 : 1 )
             z = ( ( vector2.getZ() < vector1.getZ() ) ? 0 : 1 )
             
-            rtnVec.set( x, y, z )
+            rtn = new Vector3( x, y, z )
+
         }
 
         if( vector1 instanceof Vector4 && vector2 instanceof Vector4 )
         {
-            let x,y,z: number
-            rtnVec = new Vector4( 0, 0, 0, 1 )
-
+            
             x = ( ( vector2.getX() < vector1.getX() ) ? 0 : 1 )
             y = ( ( vector2.getY() < vector1.getY() ) ? 0 : 1 )
             z = ( ( vector2.getZ() < vector1.getZ() ) ? 0 : 1 )
             
-            rtnVec.set( x, y, z, 1 )
+            rtn = new Vector4( x, y, z, 1 )
+
         }
 
-        return rtnVec
+        return rtn
 
     }
 
@@ -603,15 +739,101 @@ export class VectorMath
      */
 
     smoothstep( e1: number, e2: number, x: number ): number
+    smoothstep( e1: Vector2, e2: Vector2, x: number ): Vector2
+    smoothstep( e1: Vector3, e2: Vector3, x: number ): Vector3
+    smoothstep( e1: Vector4, e2: Vector4, x: number ): Vector4
+
+    smoothstep( e1: number | Vector2 | Vector3 | Vector4, e2: number | Vector2 | Vector3 | Vector4, x: number ): number | Vector2 | Vector3 | Vector4
     {
-        if( e1 >= e2 )
+
+        let rtn: number | Vector2 | Vector3 | Vector4 = 0
+        let r, g, b, t, t1, t2, t3: number
+
+        if( typeof e1 === 'number' && typeof e2 === 'number' )
         {
-            return 0
+
+            if( e1 >= e2 )
+            {
+
+                return 0
+
+            }
+
+            t = this.clamp( ( x - e1 ) / ( e2 - e1 ), 0.0, 1.0 )
+            rtn = t * t * ( 3.0 - 2.0 * t )
+            
+
+        }
+
+        if( e1 instanceof Vector2 && e2 instanceof Vector2 )
+        {
+
+            if( e1.getX() >= e2.getX() && e1.getY() && e2.getY() )
+            {
+
+                return 0
+
+            }
+
+            t1 = this.clamp( ( x - e1.getX() ) / ( e2.getX() - e1.getX() ), 0.0, 1.0 )
+            r = t1 * t1 * ( 3.0 - 2.0 * t1 )
+
+            t2= this.clamp( ( x - e1.getY() ) / ( e2.getY() - e1.getY() ), 0.0, 1.0 )
+            g = t2 * t2 * ( 3.0 - 2.0 * t2 )
+
+            rtn = new Vector2( r, g )
+
+        }
+
+        if( e1 instanceof Vector3 && e2 instanceof Vector3 )
+        {
+
+            if( e1.getX() >= e2.getX() && e1.getY() >= e2.getY() && e1.getZ() >= e2.getZ() )
+            {
+
+                return 0
+
+            }
+
+            t1 = this.clamp( ( x - e1.getX() ) / ( e2.getX() - e1.getX() ), 0.0, 1.0 )
+            r = t1 * t1 * ( 3.0 - 2.0 * t1 )
+
+            t2= this.clamp( ( x - e1.getY() ) / ( e2.getY() - e1.getY() ), 0.0, 1.0 )
+            g = t2 * t2 * ( 3.0 - 2.0 * t2 )
+
+            t3= this.clamp( ( x - e1.getZ() ) / ( e2.getZ() - e1.getZ() ), 0.0, 1.0 )
+            b = t3 * t3 * ( 3.0 - 2.0 * t3 )
+
+            rtn = new Vector3( r, g, b )
+
+        }
+
+        if( e1 instanceof Vector4 && e2 instanceof Vector4 )
+        {
+
+            if( e1.getX() >= e2.getX() && e1.getY() >= e2.getY() && e1.getZ() >= e2.getZ() )
+            {
+
+                return 0
+
+            }
+
+            t1 = this.clamp( ( x - e1.getX() ) / ( e2.getX() - e1.getX() ), 0.0, 1.0 )
+            r = t1 * t1 * ( 3.0 - 2.0 * t1 )
+
+            t2= this.clamp( ( x - e1.getY() ) / ( e2.getY() - e1.getY() ), 0.0, 1.0 )
+            g = t2 * t2 * ( 3.0 - 2.0 * t2 )
+
+            t3= this.clamp( ( x - e1.getZ() ) / ( e2.getZ() - e1.getZ() ), 0.0, 1.0 )
+            b = t3 * t3 * ( 3.0 - 2.0 * t3 )
+
+            rtn = new Vector4( r, g, b, e1.getW() )
+
         }
         
-        let t: number = this.clamp( ( x - e1 ) / ( e2 - e1 ), 0.0, 1.0 )
+        
+        return rtn
 
-        return t * t * ( 3.0 - 2.0 * t )
     }
 
     /**
@@ -627,17 +849,100 @@ export class VectorMath
      * @returns Smoother interpolation between e1 -> e2
      */
 
-    smootherstep( e1: number, e2: number, x: number ): number
+     smootherstep( e1: number, e2: number, x: number ): number
+     smootherstep( e1: Vector2, e2: Vector2, x: number ): Vector2
+     smootherstep( e1: Vector3, e2: Vector3, x: number ): Vector3
+     smootherstep( e1: Vector4, e2: Vector4, x: number ): Vector4
+
+    smootherstep( e1: number | Vector2 | Vector3 | Vector4, e2: number | Vector2 | Vector3 | Vector4, x: number ): number | Vector2 | Vector3 | Vector4
     {
 
-        if( e1 >= e2 )
+        let rtn: number | Vector2 | Vector3 | Vector4 = 0
+        let r, g, b, t, t1, t2, t3: number
+
+        if( typeof e1 === 'number' && typeof e2 === 'number' )
         {
-            return 0
+
+            if( e1 >= e2 )
+            {
+
+                return 0
+
+            }
+
+            t = this.clamp( ( x - e1 ) / ( e2 - e1 ), 0.0, 1.0 )
+            rtn = t * t * t * ( t * ( 6.0 * t - 15.0 ) + 10.0 )
+
+        }
+
+        if( e1 instanceof Vector2 && e2 instanceof Vector2 )
+        {
+
+            if( e1.getX() >= e2.getX() && e1.getY() && e2.getY() )
+            {
+
+                return 0
+
+            }
+
+            t1 = this.clamp( ( x - e1.getX() ) / ( e2.getX() - e1.getX() ), 0.0, 1.0 )
+            r = t1 * t1 * t1 * ( t1 * ( 6.0 * t1 - 15.0 ) + 10.0 )
+
+            t2= this.clamp( ( x - e1.getY() ) / ( e2.getY() - e1.getY() ), 0.0, 1.0 )
+            g = t2 * t2 * t2 * ( t2 * ( 6.0 * t2 - 15.0 ) + 10.0 )
+
+            rtn = new Vector2( r, g )
+
+        }
+
+        if( e1 instanceof Vector3 && e2 instanceof Vector3 )
+        {
+
+            if( e1.getX() >= e2.getX() && e1.getY() >= e2.getY() && e1.getZ() >= e2.getZ() )
+            {
+
+                return 0
+
+            }
+
+            t1 = this.clamp( ( x - e1.getX() ) / ( e2.getX() - e1.getX() ), 0.0, 1.0 )
+            r = t1 * t1 * t1 * ( t1 * ( 6.0 * t1 - 15.0 ) + 10.0 )
+
+            t2= this.clamp( ( x - e1.getY() ) / ( e2.getY() - e1.getY() ), 0.0, 1.0 )
+            g = t2 * t2 * t2 * ( t2 * ( 6.0 * t2 - 15.0 ) + 10.0 )
+
+            t3= this.clamp( ( x - e1.getZ() ) / ( e2.getZ() - e1.getZ() ), 0.0, 1.0 )
+            b = t3 * t3 * t3 * ( t3 * ( 6.0 * t3 - 15.0 ) + 10.0 )
+
+            rtn = new Vector3( r, g, b )
+
+        }
+
+        if( e1 instanceof Vector4 && e2 instanceof Vector4 )
+        {
+
+            if( e1.getX() >= e2.getX() && e1.getY() >= e2.getY() && e1.getZ() >= e2.getZ() )
+            {
+
+                return 0
+
+            }
+
+            t1 = this.clamp( ( x - e1.getX() ) / ( e2.getX() - e1.getX() ), 0.0, 1.0 )
+            r = t1 * t1 * t1 * ( t1 * ( 6.0 * t1 - 15.0 ) + 10.0 )
+
+            t2= this.clamp( ( x - e1.getY() ) / ( e2.getY() - e1.getY() ), 0.0, 1.0 )
+            g = t2 * t2 * t2 * ( t2 * ( 6.0 * t2 - 15.0 ) + 10.0 )
+
+            t3= this.clamp( ( x - e1.getZ() ) / ( e2.getZ() - e1.getZ() ), 0.0, 1.0 )
+            b = t3 * t3 * t3 * ( t3 * ( 6.0 * t3 - 15.0 ) + 10.0 )
+
+            rtn = new Vector4( r, g, b, e1.getW() )
+
         }
         
-        let t: number = this.clamp( ( x - e1 ) / ( e2 - e1 ), 0.0, 1.0 )
-
-        return t * t * t * ( t * ( 6.0 * t - 15.0 ) + 10.0 )
+        
+        return rtn
 
     }
 
