@@ -3,59 +3,64 @@ import { Vec3 } from "../types/InterfaceVec3";
 
 export class Vector4 implements Vec4
 {
-    x: number
-    y: number
-    z: number
-    w: number
+    _x: number
+    _y: number
+    _z: number
+    _w: number
 
     constructor( x?: number, y?: number, z?: number, w?: number )
     {
-        this.x = x ?? 0
-        this.y = y ?? 0
-        this.z = z ?? 0
-        this.w = w ?? 1
+        this._x = x ?? 0
+        this._y = y ?? 0
+        this._z = z ?? 0
+        this._w = w ?? 1
     }
 
     set(x: number, y: number, z: number, w: number): void 
     {
-        this.x = x
-        this.y = y
-        this.z = z
-        this.w = w
+        this._x = x
+        this._y = y
+        this._z = z
+        this._w = w
     }
 
-    setX( x: number ): void
+    public set x( x: number )
     {
 
-        this.x = x
-
-    }
-
-    setY( y: number ): void
-    {
-
-        this.y = y
+        this._x = x
 
     }
 
-    setZ( z: number ): void
+    public set y( y: number )
     {
 
-        this.z = z
+        this._y = y
 
+    }
+
+    public set z( z: number )
+    {
+
+        this._z = z
+
+    }
+
+    public set w( w: number )
+    {
+        this._w = w
     }
 
     toPoint(): void
     {
 
-        this.w = 0
+        this._w = 0
         
     }
 
     toPosition(): void
     {
 
-        this.w = 1
+        this._w = 1
 
     }
 
@@ -64,46 +69,46 @@ export class Vector4 implements Vec4
         return this
     }
 
-    getX(): number
+    public get x()
     {
-        return this.x
+        return this._x
     }
 
-    getY(): number
+    public get y()
     {
-        return this.y
+        return this._y
     }
 
-    getZ(): number
+    public get z()
     {
-        return this.z
+        return this._z
     }
 
-    getW(): number
+    public get w()
     {
-        return this.w
+        return this._w
     }
 
     isPosition(): boolean
     {
 
-        return ( ( this.w === 1 ) ? true : false )
+        return ( ( this._w === 1 ) ? true : false )
 
     }
 
     isPoint(): boolean
     {
 
-        return ( ( this.w === 0 ) ? true : false )
+        return ( ( this._w === 0 ) ? true : false )
 
     }
 
     copy( vector: Vec4 ): void
     {
-        this.x = vector.getX()
-        this.y = vector.getY()
-        this.z = vector.getZ()
-        this.w = vector.getW()
+        this.x = vector.x
+        this.y = vector.y
+        this.z = vector.z
+        this.w = vector.w
     }
 
     add( scalar: number ): this
@@ -165,9 +170,9 @@ export class Vector4 implements Vec4
     addVector( vector: Vec3 | Vec4 ): this
     {
 
-        this.x += vector.getX()
-        this.y += vector.getY()
-        this.z += vector.getZ()
+        this.x += vector.x
+        this.y += vector.y
+        this.z += vector.z
 
         return this
 
@@ -177,9 +182,9 @@ export class Vector4 implements Vec4
     {
 
 
-        this.x -= vector.getX()
-        this.y -= vector.getY()
-        this.z -= vector.getZ()
+        this.x -= vector.x
+        this.y -= vector.y
+        this.z -= vector.z
 
         return this
 
@@ -188,12 +193,12 @@ export class Vector4 implements Vec4
     divideVector( vector: Vec3 | Vec4 ): this
     {
 
-        if( vector.getX() !== 0 && vector.getY() !== 0 && vector.getZ() !== 0 )
+        if( vector.x !== 0 && vector.y !== 0 && vector.z !== 0 )
         {
 
-            this.x /= vector.getX()
-            this.y /= vector.getY()
-            this.z /= vector.getZ()
+            this.x /= vector.x
+            this.y /= vector.y
+            this.z /= vector.z
 
         }
         
@@ -204,9 +209,9 @@ export class Vector4 implements Vec4
     multiplyVector( vector: Vec3 | Vec4 ): this
     {
 
-        this.x *= vector.getX()
-        this.y *= vector.getY()
-        this.z *= vector.getZ()
+        this.x *= vector.x
+        this.y *= vector.y
+        this.z *= vector.z
 
         return this
 

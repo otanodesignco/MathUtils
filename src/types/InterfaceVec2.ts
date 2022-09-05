@@ -1,14 +1,14 @@
 export interface Vec2 
 {
 
-    x: number
-    y: number
+    _x: number
+    _y: number
     set( x: number, y: number ): void
-    setX( x: number ): void
-    setY( y: number ): void
+    set x( x: number )
+    set y( y: number )
     get(): object
-    getX(): number
-    getY(): number
+    get x()
+    get y()
     copy( vector: Vec2 ): void
     add( scalar: number ): this
     addScalar( scalar: number): this

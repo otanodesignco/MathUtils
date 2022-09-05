@@ -2,42 +2,42 @@ import  { Vec3 } from "../types/InterfaceVec3";
 
 export class Vector3 implements Vec3
 {
-    x: number
-    y: number
-    z: number
+    _x: number
+    _y: number
+    _z: number
 
     constructor( x?: number, y?: number, z?: number )
     {
-        this.x = x ?? 0
-        this.y = y ?? 0
-        this.z = z ?? 0
+        this._x = x ?? 0
+        this._y = y ?? 0
+        this._z = z ?? 0
     }
 
     set(x: number, y: number, z: number): void 
     {
-        this.x = x
-        this.y = y
-        this.z = z
+        this._x = x
+        this._y = y
+        this._z = z
     }
 
-    setX( x: number ): void
+    public set x( x: number )
     {
 
-        this.x = x
-
-    }
-
-    setY( y: number ): void
-    {
-
-        this.y = y
+        this._x = x
 
     }
 
-    setZ( z: number ): void
+    public set y( y: number )
     {
 
-        this.z = z
+        this._y = y
+
+    }
+
+    public set z( z: number )
+    {
+
+        this._z = z
 
     }
 
@@ -46,34 +46,34 @@ export class Vector3 implements Vec3
         return this
     }
 
-    getX(): number
+    public get x()
     {
-        return this.x
+        return this._x
     }
 
-    getY(): number
+    public get y()
     {
-        return this.y
+        return this._y
     }
 
-    getZ(): number
+    public get z()
     {
-        return this.z
+        return this._z
     }
 
     copy( vector: Vec3 ): void
     {
-        this.x = vector.getX()
-        this.y = vector.getY()
-        this.z = vector.getZ()
+        this._x = vector.x
+        this._y = vector.y
+        this._z = vector.z
     }
 
     add( scalar: number ): this
     {
 
-        this.x += scalar
-        this.y += scalar
-        this.z += scalar
+        this._x += scalar
+        this._y += scalar
+        this._z += scalar
 
         return this
 
@@ -82,9 +82,9 @@ export class Vector3 implements Vec3
     addScalar( scalar: number ): this
     {
 
-        this.x += scalar
-        this.y += scalar
-        this.z += scalar
+        this._x += scalar
+        this._y += scalar
+        this._z += scalar
 
         return this
 
@@ -93,9 +93,9 @@ export class Vector3 implements Vec3
     subScalar( scalar: number ): this
     {
 
-        this.x -= scalar
-        this.y -= scalar
-        this.z -= scalar
+        this._x -= scalar
+        this._y -= scalar
+        this._z -= scalar
 
         return this
 
@@ -104,9 +104,9 @@ export class Vector3 implements Vec3
     multiplyScalar( scalar: number ): this
     {
 
-        this.x *= scalar
-        this.y *= scalar
-        this.z *= scalar
+        this._x *= scalar
+        this._y *= scalar
+        this._z *= scalar
 
         return this
 
@@ -116,9 +116,9 @@ export class Vector3 implements Vec3
 
         if( scalar !== 0 )
         {
-            this.x /= scalar
-            this.y /= scalar
-            this.z /= scalar
+            this._x /= scalar
+            this._y /= scalar
+            this._z /= scalar
         }
 
         return this
@@ -127,9 +127,9 @@ export class Vector3 implements Vec3
     addVector( vector: Vec3 ): this
     {
 
-        this.x += vector.getX()
-        this.y += vector.getY()
-        this.z += vector.getZ()
+        this._x += vector.x
+        this._y += vector.y
+        this._z += vector.z
 
         return this
 
@@ -139,9 +139,9 @@ export class Vector3 implements Vec3
     {
 
 
-        this.x -= vector.getX()
-        this.y -= vector.getY()
-        this.z -= vector.getZ()
+        this._x -= vector.x
+        this._y -= vector.y
+        this._z -= vector.z
 
         return this
 
@@ -150,12 +150,12 @@ export class Vector3 implements Vec3
     divideVector( vector: Vec3 ): this
     {
 
-        if( vector.getX() !== 0 && vector.getY() !== 0 && vector.getZ() !== 0 )
+        if( vector.x !== 0 && vector.y !== 0 && vector.z !== 0 )
         {
 
-            this.x /= vector.getX()
-            this.y /= vector.getY()
-            this.z /= vector.getZ()
+            this._x /= vector.x
+            this._y /= vector.y
+            this._z /= vector.z
 
         }
         
@@ -166,9 +166,9 @@ export class Vector3 implements Vec3
     multiplyVector( vector: Vec3 ): this
     {
 
-        this.x *= vector.getX()
-        this.y *= vector.getY()
-        this.z *= vector.getZ()
+        this._x *= vector.x
+        this._y *= vector.y
+        this._z *= vector.z
 
         return this
 
@@ -177,9 +177,9 @@ export class Vector3 implements Vec3
     negate(): this
     {
 
-        this.x = -this.x
-        this.y = -this.y
-        this.z = -this.z
+        this._x = -this._x
+        this._y = -this._y
+        this._z = -this._z
 
         return this
 
@@ -188,9 +188,9 @@ export class Vector3 implements Vec3
     inverse(): this
     {
 
-        this.x = 1.0 / this.x
-        this.y = 1.0 / this.y
-        this.z = 1.0 / this.z
+        this._x = 1.0 / this._x
+        this._y = 1.0 / this._y
+        this._z = 1.0 / this._z
 
         return this
 

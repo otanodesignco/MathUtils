@@ -2,35 +2,30 @@ import { Vec2 } from "../types/InterfaceVec2";
 
 export class Vector2 implements Vec2
 {
-    x: number
-    y: number
+    _x: number
+    _y: number
 
     constructor( x?: number, y?: number )
     {
-        this.x = x ?? 0
-        this.y = y ?? 0
+        this._x = x ?? 0
+        this._y = y ?? 0
     }
 
-    copy( vector: Vec2 ): void
-    {
-        this.x = vector.getX()
-        this.y = vector.getY()
-    }
-
+    
     set(x: number, y: number): void 
     {
         this.x = x
         this.y = y
     }
 
-    setX( x: number ): void
+    public set x( x: number )
     {
 
         this.x = x
 
     }
 
-    setY( y: number ): void
+    public set y( y: number )
     {
 
         this.y = y
@@ -42,21 +37,27 @@ export class Vector2 implements Vec2
         return this
     }
 
-    getX(): number
+    public get x()
     {
-        return this.x
+        return this._x
     }
 
-    getY(): number
+    public get y()
     {
-        return this.y
+        return this._y
+    }
+
+    copy( vector: Vec2 ): void
+    {
+        this._x = vector.x
+        this._y = vector.y
     }
 
     add( scalar: number ): this
     {
 
-        this.x += scalar
-        this.y += scalar
+        this._x += scalar
+        this._y += scalar
 
         return this
 
@@ -65,8 +66,8 @@ export class Vector2 implements Vec2
     addScalar( scalar: number ): this
     {
 
-        this.x += scalar
-        this.y += scalar
+        this._x += scalar
+        this._y += scalar
 
         return this
 
@@ -75,8 +76,8 @@ export class Vector2 implements Vec2
     subScalar( scalar: number ): this
     {
 
-        this.x -= scalar
-        this.y -= scalar
+        this._x -= scalar
+        this._y -= scalar
 
         return this
 
@@ -85,8 +86,8 @@ export class Vector2 implements Vec2
     multiplyScalar( scalar: number ): this
     {
 
-        this.x *= scalar
-        this.y *= scalar
+        this._x *= scalar
+        this._y *= scalar
 
         return this
 
@@ -96,8 +97,8 @@ export class Vector2 implements Vec2
 
         if( scalar !== 0 )
         {
-            this.x /= scalar
-            this.y /= scalar
+            this._x /= scalar
+            this._y /= scalar
         }
 
         return this
@@ -106,8 +107,8 @@ export class Vector2 implements Vec2
     addVector( vector: Vec2 ): this
     {
 
-        this.x += vector.getX()
-        this.y += vector.getY()
+        this._x += vector.x
+        this._y += vector.y
 
         return this
 
@@ -117,8 +118,8 @@ export class Vector2 implements Vec2
     {
 
 
-        this.x -= vector.getX()
-        this.y -= vector.getY()
+        this._x -= vector.x
+        this._y -= vector.y
         return this
 
     }
@@ -126,11 +127,11 @@ export class Vector2 implements Vec2
     divideVector( vector: Vec2 ): this
     {
 
-        if( vector.getX() !== 0 && vector.getY() !== 0 )
+        if( vector.x !== 0 && vector.y !== 0 )
         {
 
-            this.x /= vector.getX()
-            this.y /= vector.getY()
+            this._x /= vector.x
+            this._y /= vector.y
 
         }
         
@@ -141,8 +142,8 @@ export class Vector2 implements Vec2
     multiplyVector( vector: Vec2 ): this
     {
 
-        this.x *= vector.getX()
-        this.y *= vector.getY()
+        this._x *= vector.x
+        this._y *= vector.y
 
         return this
 
@@ -151,8 +152,8 @@ export class Vector2 implements Vec2
     negate(): this
     {
 
-        this.x = -this.x
-        this.y = -this.y
+        this._x = -this._x
+        this._y = -this._y
 
         return this
 
@@ -161,8 +162,8 @@ export class Vector2 implements Vec2
     inverse(): this
     {
 
-        this.x = 1.0 / this.x
-        this.y = 1.0 / this.y
+        this._x = 1.0 / this._x
+        this._y = 1.0 / this._y
 
         return this
 

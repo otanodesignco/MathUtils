@@ -3,58 +3,61 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Vector4 = void 0;
 class Vector4 {
     constructor(x, y, z, w) {
-        this.x = x !== null && x !== void 0 ? x : 0;
-        this.y = y !== null && y !== void 0 ? y : 0;
-        this.z = z !== null && z !== void 0 ? z : 0;
-        this.w = w !== null && w !== void 0 ? w : 1;
+        this._x = x !== null && x !== void 0 ? x : 0;
+        this._y = y !== null && y !== void 0 ? y : 0;
+        this._z = z !== null && z !== void 0 ? z : 0;
+        this._w = w !== null && w !== void 0 ? w : 1;
     }
     set(x, y, z, w) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.w = w;
+        this._x = x;
+        this._y = y;
+        this._z = z;
+        this._w = w;
     }
-    setX(x) {
-        this.x = x;
+    set x(x) {
+        this._x = x;
     }
-    setY(y) {
-        this.y = y;
+    set y(y) {
+        this._y = y;
     }
-    setZ(z) {
-        this.z = z;
+    set z(z) {
+        this._z = z;
+    }
+    set w(w) {
+        this._w = w;
     }
     toPoint() {
-        this.w = 0;
+        this._w = 0;
     }
     toPosition() {
-        this.w = 1;
+        this._w = 1;
     }
     get() {
         return this;
     }
-    getX() {
-        return this.x;
+    get x() {
+        return this._x;
     }
-    getY() {
-        return this.y;
+    get y() {
+        return this._y;
     }
-    getZ() {
-        return this.z;
+    get z() {
+        return this._z;
     }
-    getW() {
-        return this.w;
+    get w() {
+        return this._w;
     }
     isPosition() {
-        return ((this.w === 1) ? true : false);
+        return ((this._w === 1) ? true : false);
     }
     isPoint() {
-        return ((this.w === 0) ? true : false);
+        return ((this._w === 0) ? true : false);
     }
     copy(vector) {
-        this.x = vector.getX();
-        this.y = vector.getY();
-        this.z = vector.getZ();
-        this.w = vector.getW();
+        this.x = vector.x;
+        this.y = vector.y;
+        this.z = vector.z;
+        this.w = vector.w;
     }
     add(scalar) {
         this.x += scalar;
@@ -89,29 +92,29 @@ class Vector4 {
         return this;
     }
     addVector(vector) {
-        this.x += vector.getX();
-        this.y += vector.getY();
-        this.z += vector.getZ();
+        this.x += vector.x;
+        this.y += vector.y;
+        this.z += vector.z;
         return this;
     }
     subVector(vector) {
-        this.x -= vector.getX();
-        this.y -= vector.getY();
-        this.z -= vector.getZ();
+        this.x -= vector.x;
+        this.y -= vector.y;
+        this.z -= vector.z;
         return this;
     }
     divideVector(vector) {
-        if (vector.getX() !== 0 && vector.getY() !== 0 && vector.getZ() !== 0) {
-            this.x /= vector.getX();
-            this.y /= vector.getY();
-            this.z /= vector.getZ();
+        if (vector.x !== 0 && vector.y !== 0 && vector.z !== 0) {
+            this.x /= vector.x;
+            this.y /= vector.y;
+            this.z /= vector.z;
         }
         return this;
     }
     multiplyVector(vector) {
-        this.x *= vector.getX();
-        this.y *= vector.getY();
-        this.z *= vector.getZ();
+        this.x *= vector.x;
+        this.y *= vector.y;
+        this.z *= vector.z;
         return this;
     }
     negate() {
